@@ -1,0 +1,26 @@
+[
+  {
+    "id": "TRAINING",
+    "name": "Training",
+    "color": "#c8a64b",
+    "order": 1
+  },
+  {
+    "id": "MAGIC",
+    "name": "Magic",
+    "color": "#5ea5c8",
+    "order": 2
+  },
+  {
+    "id": "ALCHEMY",
+    "name": "Alchemy",
+    "color": "#7aaa5b",
+    "order": 3
+  },
+  {
+    "id": "SWORDSMANSHIP",
+    "name": "Swordsmanship",
+    "color": "#c46b5b",
+    "order": 4
+  }
+]

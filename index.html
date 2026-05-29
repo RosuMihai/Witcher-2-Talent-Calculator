@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Witcher 2 Talent Calculator</title>
+    <link rel="stylesheet" href="css/calculator.css">
+</head>
+<body>
+<main class="app-shell">
+    <header class="app-header">
+        <h1>Witcher 2 Talent Calculator</h1>
+    </header>
+
+    <section class="calculator-layout" aria-label="Talent calculator">
+        <div class="tree-stage">
+            <div id="treeGrid" class="tree-grid" aria-live="polite"></div>
+        </div>
+
+        <div class="details-column">
+            <div class="sidebar-controls">
+                <div class="point-meter" aria-label="Talent points left">
+                    <button id="resetAllButton" class="reset-all point-meter-reset" type="button" aria-label="Reset all talents" data-tooltip-title="Refund All Points" disabled></button>
+                    <span id="pointsUsed">34</span>
+                    <span class="point-label">Talent Points</span>
+                </div>
+                <div class="mutagen-meter" aria-label="Mutagen slots unlocked">
+                    <span id="mutagenSlotsUnlocked">0</span>
+                    <span class="point-label">Mutagen Slots</span>
+                </div>
+            </div>
+            <aside class="details-panel" aria-label="Talent details">
+                <div class="details-topline">
+                    <div id="detailIcon" class="detail-icon">W2</div>
+                    <div>
+                        <p id="detailTree" class="detail-tree">None</p>
+                        <h2 id="detailTitle">Choose a talent</h2>
+                    </div>
+                </div>
+                <p id="detailDescription" class="detail-description">
+                    No talent selected.
+                </p>
+                <div class="rank-readout">
+                    <span>Rank</span>
+                    <strong id="detailRank">0 / 0</strong>
+                </div>
+                <p id="detailStatus" class="detail-status">Training opens the advanced paths after 6 points.</p>
+            </aside>
+        </div>
+    </section>
+</main>
+
+<script src="js/calculator.js"></script>
+</body>
+</html>

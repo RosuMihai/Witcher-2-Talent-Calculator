@@ -1,0 +1,773 @@
+[
+    {
+        "id": "training_hardiness",
+        "icon": "HD",
+        "title": "Hardiness",
+        "description": "Rank 1:\nVitality +10\n\nRank 2:\nVitality +50",
+        "rank": 2,
+        "treeId": "TRAINING",
+        "requiredTalentIds": [],
+        "row": 1,
+        "column": 1,
+        "order": 1,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "training_vigor",
+        "icon": "VR",
+        "title": "Vigor Regeneration",
+        "description": "Rank 1:\nVigor regeneration while out of combat +25%\n\nRank 2:\nVigor regeneration while in combat +25%",
+        "rank": 2,
+        "treeId": "TRAINING",
+        "requiredTalentIds": [],
+        "row": 1,
+        "column": 3,
+        "order": 2,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "training_dagger",
+        "icon": "DG",
+        "title": "Dagger Throwing",
+        "description": "Rank 1:\nUnlocks the ability to throw daggers.\n\nRank 2:\nDamage dealt by daggers +20",
+        "rank": 2,
+        "treeId": "TRAINING",
+        "requiredTalentIds": [],
+        "row": 1,
+        "column": 5,
+        "order": 3,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "training_parrying",
+        "icon": "PR",
+        "title": "Parrying",
+        "description": "Rank 1:\nUnlocks the ability to parry blows from all directions.\n\nRank 2:\n100% Damage reduction while parrying with full Vigor.",
+        "rank": 2,
+        "treeId": "TRAINING",
+        "requiredTalentIds": [
+                                 "training_hardiness",
+                                 "training_vigor",
+                                 "training_dagger"
+                             ],
+        "row": 2,
+        "column": 3,
+        "order": 4,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "training_arrow",
+        "icon": "AR",
+        "title": "Arrow Redirection",
+        "description": "Rank 1:\nUnlocks the ability to redirect arrows.\n\nRank 2:\nUnlocks the ability to redirect arrows towards the shooter.",
+        "rank": 2,
+        "treeId": "TRAINING",
+        "requiredTalentIds": [
+                                 "training_parrying"
+                             ],
+        "row": 3,
+        "column": 2,
+        "order": 5,
+        "isMutagenSlot": true
+    },
+    {
+        "id": "training_fortitude",
+        "icon": "FT",
+        "title": "Fortitude",
+        "description": "Rank 1:\nVigor regeneration during combat +10%\n\nRank 2:\nVigor +1",
+        "rank": 2,
+        "treeId": "TRAINING",
+        "requiredTalentIds": [
+                                 "training_parrying"
+                             ],
+        "row": 3,
+        "column": 4,
+        "order": 6,
+        "isMutagenSlot": true
+    },
+    {
+        "id": "magic_aard",
+        "icon": "AA",
+        "title": "Enhanced Aard Sign",
+        "description": "Rank 1:\nUnlocks Aard Sign level II\nSign range +2m\n\nRank 2:\nUnlocks Aard Sign level III\nAard Sign affects entire areas\nSign range +6m",
+        "rank": 2,
+        "treeId": "MAGIC",
+        "requiredTalentIds": [],
+        "row": 1,
+        "column": 2,
+        "order": 1,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "magic_destructive",
+        "icon": "DM",
+        "title": "Destructive Magic",
+        "description": "Rank 1:\nSign damage +5\n\nRank 2:\nSign damage +10\nVigor +1",
+        "rank": 2,
+        "treeId": "MAGIC",
+        "requiredTalentIds": [],
+        "row": 1,
+        "column": 3,
+        "order": 2,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "magic_axii",
+        "icon": "AX",
+        "title": "Enhanced Axii Sign",
+        "description": "Rank 1:\nEnables level 2 Axii Sign\nBewitched opponent gets +20% Vitality\n+20% damage done\n\nRank 2:\nEnables level 3 Axii Sign\nBewitched opponent gets +50% Vitality\n+50% damage done",
+        "rank": 2,
+        "treeId": "MAGIC",
+        "requiredTalentIds": [],
+        "row": 1,
+        "column": 4,
+        "order": 3,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "magic_quen",
+        "icon": "QN",
+        "title": "Enhanced Quen Sign",
+        "description": "Rank 1:\nEnables level 2 Quen Sign\nQuen now deflects 20% damage\nSign duration +20s\n\nRank 2:\nEnables level 3 Quen Sign\nQuen now deflects 50% damage\nSign duration +60s",
+        "rank": 2,
+        "treeId": "MAGIC",
+        "requiredTalentIds": [
+                                 "magic_aard",
+                                 "magic_destructive",
+                                 "magic_axii"
+                             ],
+        "row": 2,
+        "column": 3,
+        "order": 4,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "magic_intensification",
+        "icon": "MI",
+        "title": "Magic Intensification",
+        "description": "Rank 1:\nSign intensity +1\n\nRank 2:\nSign intensity +2\nDamage reduction +5%",
+        "rank": 2,
+        "treeId": "MAGIC",
+        "requiredTalentIds": [
+                                 "magic_quen"
+                             ],
+        "row": 2,
+        "column": 1,
+        "order": 5,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "magic_venting",
+        "icon": "VN",
+        "title": "Venting",
+        "description": "Rank 1:\nQuen now transfers the reflected damage to up to two opponents\n\nRank 2:\nQuen now transfers the reflected damage to up to three opponents",
+        "rank": 2,
+        "treeId": "MAGIC",
+        "requiredTalentIds": [
+                                 "magic_quen"
+                             ],
+        "row": 2,
+        "column": 5,
+        "order": 6,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "magic_vigor",
+        "icon": "MV",
+        "title": "Magical Vigor",
+        "description": "Rank 1:\nVigor +1\n\nRank 2:\nVigor +2",
+        "rank": 2,
+        "treeId": "MAGIC",
+        "requiredTalentIds": [
+                                 "magic_quen",
+                                 "magic_attraction",
+                                 "magic_igni"
+                             ],
+        "row": 3,
+        "column": 3,
+        "order": 7,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "magic_attraction",
+        "icon": "FA",
+        "title": "Fatal Attraction",
+        "description": "Rank 1:\nAxii sign can now bewitch two opponents at once\n\nRank 2:\nAxii Sign can now bewitch three opponents at once",
+        "rank": 2,
+        "treeId": "MAGIC",
+        "requiredTalentIds": [
+                                 "magic_intensification",
+                                 "magic_vigor",
+                                 "magic_yrden"
+                             ],
+        "row": 3,
+        "column": 2,
+        "order": 8,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "magic_igni",
+        "icon": "IG",
+        "title": "Enhanced Igni Sign",
+        "description": "Rank 1:\nEnables level 2 Igni Sign\nIgni can now incinerate enemies\nSign range +3m\nIncineration chance 50%-60%\nIncineration damage 4-6\nIncineration duration 8-12s\n\nRank 2:\nEnables level 3 Igni Sign\nIgni now has an area effect\nSign range +6m",
+        "rank": 2,
+        "treeId": "MAGIC",
+        "requiredTalentIds": [
+                                 "magic_venting",
+                                 "magic_vigor",
+                                 "magic_yrden"
+                             ],
+        "row": 3,
+        "column": 4,
+        "order": 9,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "magic_yrden",
+        "icon": "YR",
+        "title": "Enhanced Yrden Sign",
+        "description": "Rank 1:\nEnables level 2 Yrden Sign\nCan now lay down two Yrden traps\n\nRank 2:\nEnables level 3 Yrden Sign\nCan now lay down three Yrden traps",
+        "rank": 2,
+        "treeId": "MAGIC",
+        "requiredTalentIds": [
+                                 "magic_attraction",
+                                 "magic_igni"
+                             ],
+        "row": 4,
+        "column": 3,
+        "order": 10,
+        "isMutagenSlot": true
+    },
+    {
+        "id": "magic_glyph",
+        "icon": "GL",
+        "title": "Glyph Enhancement",
+        "description": "Rank 1:\nYrden traps are linked. Opponents cannot move through the links\n\nRank 2:\nThe links between Yrden traps now deal 5 damage per second",
+        "rank": 2,
+        "treeId": "MAGIC",
+        "requiredTalentIds": [
+                                 "magic_yrden"
+                             ],
+        "row": 5,
+        "column": 2,
+        "order": 11,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "magic_energy",
+        "icon": "EF",
+        "title": "Energy Flow",
+        "description": "Rank 1:\nCritical effect chance of Signs +5%\n\nRank 2:\nCritical effect chance of Signs +15%",
+        "rank": 2,
+        "treeId": "MAGIC",
+        "requiredTalentIds": [
+                                 "magic_yrden"
+                             ],
+        "row": 5,
+        "column": 4,
+        "order": 12,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "magic_life",
+        "icon": "LS",
+        "title": "Magical Life Force",
+        "description": "Rank 1:\nVitality +50\n\nRank 2:\nAll resistances +5%",
+        "rank": 2,
+        "treeId": "MAGIC",
+        "requiredTalentIds": [
+                                 "magic_yrden"
+                             ],
+        "row": 5,
+        "column": 3,
+        "order": 13,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "magic_sense",
+        "icon": "SM",
+        "title": "Sense of Magic",
+        "description": "Rank 1:\nEnables the use of the Heliotrope Sign\nAllows the generation of adrenaline through Signs\n\nRank 2:\nAll resistances +5%\nAdrenaline Generation through Signs +50%",
+        "rank": 2,
+        "treeId": "MAGIC",
+        "requiredTalentIds": [
+                                 "magic_glyph",
+                                 "magic_energy",
+                                 "magic_life"
+                             ],
+        "row": 6,
+        "column": 3,
+        "order": 14,
+        "isMutagenSlot": true
+    },
+    {
+        "id": "magic_control",
+        "icon": "CP",
+        "title": "Control over the Power",
+        "description": "Rank 1:\nAll resistances +20%\nSign Damage +3\nAdrenaline generated through Signs +10%\n\nRank 2:\nAll resistances +30%\nSign Damage +10\nAdrenaline generated through Signs +60%",
+        "rank": 2,
+        "treeId": "MAGIC",
+        "requiredTalentIds": [
+                                 "magic_sense"
+                             ],
+        "row": 7,
+        "column": 3,
+        "order": 15,
+        "isMutagenSlot": true
+    },
+    {
+        "id": "alchemy_alchemist",
+        "icon": "AL",
+        "title": "Alchemist",
+        "description": "Rank 1:\nBomb damage: +30%\nTrap damage: +20%\n\nRank 2:\nBomb damage: +100%\nTrap damage: +100%\n\nNote: Actual increase depends on item",
+        "rank": 2,
+        "treeId": "ALCHEMY",
+        "requiredTalentIds": [],
+        "row": 1,
+        "column": 2,
+        "order": 1,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "alchemy_synthesis",
+        "icon": "SY",
+        "title": "Synthesis",
+        "description": "Rank 1:\nVitality +20\n\nRank 2:\nVitality +100",
+        "rank": 2,
+        "treeId": "ALCHEMY",
+        "requiredTalentIds": [],
+        "row": 1,
+        "column": 4,
+        "order": 2,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "alchemy_side_effect",
+        "icon": "SE",
+        "title": "Side Effect",
+        "description": "Rank 1:\nChance of creating mutagens as a byproduct of alchemy +2%\n\nRank 2:\nChance of creating mutagens as a byproduct of alchemy +10%",
+        "rank": 2,
+        "treeId": "ALCHEMY",
+        "requiredTalentIds": [
+                                 "alchemy_alchemist",
+                                 "alchemy_harvester"
+                             ],
+        "row": 2,
+        "column": 1,
+        "order": 3,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "alchemy_potions",
+        "icon": "SP",
+        "title": "Specialization: Potions",
+        "description": "Rank 1:\nPotion duration +10%\n\nRank 2:\nPotion duration +40%",
+        "rank": 2,
+        "treeId": "ALCHEMY",
+        "requiredTalentIds": [
+                                 "alchemy_synthesis",
+                                 "alchemy_harvester"
+                             ],
+        "row": 2,
+        "column": 5,
+        "order": 4,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "alchemy_harvester",
+        "icon": "HV",
+        "title": "Harvester",
+        "description": "Rank 1:\nAlchemical ingredients harvested +1\n\nRank 2:\nAlchemical ingredients harvested +2",
+        "rank": 2,
+        "treeId": "ALCHEMY",
+        "requiredTalentIds": [
+                                 "alchemy_side_effect",
+                                 "alchemy_potions"
+                             ],
+        "row": 3,
+        "column": 3,
+        "order": 5,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "alchemy_catalysis",
+        "icon": "CA",
+        "title": "Catalysis",
+        "description": "Rank 1:\nPositive effects of all potions consumed: +15%\negative effects of all potions consumed: -30%\n\nRank 2:\nPositive effects of all potions consumed: +35%\nNegative effects of all potions consumed: -80%\n\nNote: Actual effects depend on item",
+        "rank": 2,
+        "treeId": "ALCHEMY",
+        "requiredTalentIds": [
+                                 "alchemy_harvester"
+                             ],
+        "row": 4,
+        "column": 2,
+        "order": 6,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "alchemy_oils",
+        "icon": "SO",
+        "title": "Specialization: Oils",
+        "description": "Rank 1:\nOil duration +10%\n\nRank 2:\nOil duration +40%",
+        "rank": 2,
+        "treeId": "ALCHEMY",
+        "requiredTalentIds": [
+                                 "alchemy_harvester"
+                             ],
+        "row": 4,
+        "column": 3,
+        "order": 7,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "alchemy_impregnation",
+        "icon": "IM",
+        "title": "Impregnation",
+        "description": "Rank 1:\nEffects of all mutagens: +15%\n\nRank 2:\nEffects of all mutagens: +35%\n\nNote: Actual increase depends on item",
+        "rank": 2,
+        "treeId": "ALCHEMY",
+        "requiredTalentIds": [
+                                 "alchemy_oils"
+                             ],
+        "row": 5,
+        "column": 2,
+        "order": 8,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "alchemy_transmutation",
+        "icon": "TR",
+        "title": "Transmutation",
+        "description": "Rank 1:\nEffects of all oils used: +15%\n\nRank 2:\nEffects of all oils used: +35%\n\nNote: Actual increase depends on item",
+        "rank": 2,
+        "treeId": "ALCHEMY",
+        "requiredTalentIds": [
+                                 "alchemy_oils"
+                             ],
+        "row": 5,
+        "column": 3,
+        "order": 9,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "alchemy_taster",
+        "icon": "TA",
+        "title": "Taster",
+        "description": "Rank 1:\nAllows the consumption of one additional potion\n\nRank 2:\nDamage done while poisoned +15%\nDamage reduction while poisoned +10%",
+        "rank": 2,
+        "treeId": "ALCHEMY",
+        "requiredTalentIds": [
+                                 "alchemy_oils"
+                             ],
+        "row": 5,
+        "column": 4,
+        "order": 10,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "alchemy_metathesis",
+        "icon": "ME",
+        "title": "Metathesis",
+        "description": "Rank 1:\nDamage dealt when poisoned +5%\n\nRank 2:\nDamage dealt when poisoned +25%",
+        "rank": 2,
+        "treeId": "ALCHEMY",
+        "requiredTalentIds": [
+                                 "alchemy_impregnation",
+                                 "alchemy_transmutation",
+                                 "alchemy_taster"
+                             ],
+        "row": 6,
+        "column": 3,
+        "order": 11,
+        "isMutagenSlot": true
+    },
+    {
+        "id": "alchemy_condensation",
+        "icon": "CO",
+        "title": "Condensation",
+        "description": "Rank 1:\nVigor regeneration while poisoned +15%\n\nRank 2:\nVigor regeneration while poisoned +55%",
+        "rank": 2,
+        "treeId": "ALCHEMY",
+        "requiredTalentIds": [
+                                 "alchemy_metathesis"
+                             ],
+        "row": 7,
+        "column": 2,
+        "order": 12,
+        "isMutagenSlot": true
+    },
+    {
+        "id": "alchemy_berserker",
+        "icon": "BE",
+        "title": "Berserker",
+        "description": "Rank 1:\nChance of instant kill while poisoned +1%\n\nRank 2:\nChance of instant kill while poisoned +3%",
+        "rank": 2,
+        "treeId": "ALCHEMY",
+        "requiredTalentIds": [
+                                 "alchemy_metathesis"
+                             ],
+        "row": 7,
+        "column": 4,
+        "order": 13,
+        "isMutagenSlot": true
+    },
+    {
+        "id": "alchemy_mutant",
+        "icon": "MU",
+        "title": "Mutant",
+        "description": "Rank 1:\nEnables Berserk mode, activated with adrenaline-filled bar\nAllows generation of adrenaline while poisoned.\n\nRank 2:\nAdrenaline generated while poisoned +25%",
+        "rank": 2,
+        "treeId": "ALCHEMY",
+        "requiredTalentIds": [
+                                 "alchemy_condensation",
+                                 "alchemy_berserker"
+                             ],
+        "row": 8,
+        "column": 3,
+        "order": 14,
+        "isMutagenSlot": true
+    },
+    {
+        "id": "alchemy_amplification",
+        "icon": "AM",
+        "title": "Amplification",
+        "description": "Rank 1:\nAdrenaline generated while poisoned +15%\nDamage done while poisoned +10%\nDamage taken while poisoned -5%.\n\nRank 2:\nAdrenaline generated while poisoned +50%\nDamage done while poisoned +30%\nDamage taken while poisoned -25%.",
+        "rank": 2,
+        "treeId": "ALCHEMY",
+        "requiredTalentIds": [
+                                 "alchemy_mutant"
+                             ],
+        "row": 9,
+        "column": 3,
+        "order": 15,
+        "isMutagenSlot": true
+    },
+    {
+        "id": "sword_position",
+        "icon": "PO",
+        "title": "Position",
+        "description": "Rank 1:\nDamage taken by backstab 150%\n\nRank 2:\nDamage taken by backstab 100%",
+        "rank": 2,
+        "treeId": "SWORDSMANSHIP",
+        "requiredTalentIds": [],
+        "row": 1,
+        "column": 4,
+        "order": 1,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "sword_riposte",
+        "icon": "RP",
+        "title": "Riposte",
+        "description": "Rank 1:\nAllows retaliation\n\nRank 2:\nChance of instant kill by riposte 10%",
+        "rank": 2,
+        "treeId": "SWORDSMANSHIP",
+        "requiredTalentIds": [],
+        "row": 1,
+        "column": 3,
+        "order": 2,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "sword_footwork",
+        "icon": "FW",
+        "title": "Footwork",
+        "description": "Rank 1:\nDodge distance +100%\n\nRank 2:\nDodge distance +200%",
+        "rank": 2,
+        "treeId": "SWORDSMANSHIP",
+        "requiredTalentIds": [],
+        "row": 1,
+        "column": 2,
+        "order": 3,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "sword_violence",
+        "icon": "VI",
+        "title": "Violence",
+        "description": "Rank 1:\nSword damage +5%\n\nRank 2:\nSword damage +15%",
+        "rank": 2,
+        "treeId": "SWORDSMANSHIP",
+        "requiredTalentIds": [
+                                 "sword_position",
+                                 "sword_whirl"
+                             ],
+        "row": 2,
+        "column": 5,
+        "order": 4,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "sword_guard",
+        "icon": "GD",
+        "title": "Guard",
+        "description": "Rank 1:\nVigor required to block -25%\n\nRank 2:\nVigor required to block -50%",
+        "rank": 2,
+        "treeId": "SWORDSMANSHIP",
+        "requiredTalentIds": [
+                                 "sword_riposte",
+                                 "sword_tough"
+                             ],
+        "row": 2,
+        "column": 3,
+        "order": 5,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "sword_schemer",
+        "icon": "SC",
+        "title": "Schemer",
+        "description": "Rank 1:\nVigor regeneration in combat +10%\n\nRank 2:\nVigor regeneration in combat +40%",
+        "rank": 2,
+        "treeId": "SWORDSMANSHIP",
+        "requiredTalentIds": [
+                                 "sword_footwork",
+                                 "sword_tough"
+                             ],
+        "row": 2,
+        "column": 1,
+        "order": 6,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "sword_whirl",
+        "icon": "WH",
+        "title": "Whirl",
+        "description": "Rank 1:\nCan now cause damage to multiple enemies\nDamage done to secondary targets 50%\n\nRank 2:\nDamage done to secondary targets 100%",
+        "rank": 2,
+        "treeId": "SWORDSMANSHIP",
+        "requiredTalentIds": [
+                                 "sword_violence",
+                                 "sword_hardy"
+                             ],
+        "row": 3,
+        "column": 4,
+        "order": 7,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "sword_tough",
+        "icon": "TG",
+        "title": "Tough Guy",
+        "description": "Rank 1:\nDamage received -5%\n\nRank 2:\nDamage received -15%",
+        "rank": 2,
+        "treeId": "SWORDSMANSHIP",
+        "requiredTalentIds": [
+                                 "sword_guard",
+                                 "sword_schemer",
+                                 "sword_hardy"
+                             ],
+        "row": 3,
+        "column": 2,
+        "order": 8,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "sword_hardy",
+        "icon": "HA",
+        "title": "Hardy",
+        "description": "Rank 1:\nVitality +25\n\nRank 2:\nVitality +100",
+        "rank": 2,
+        "treeId": "SWORDSMANSHIP",
+        "requiredTalentIds": [
+                                 "sword_whirl",
+                                 "sword_tough"
+                             ],
+        "row": 4,
+        "column": 3,
+        "order": 9,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "sword_precision",
+        "icon": "PS",
+        "title": "Precision",
+        "description": "Rank 1:\nChance of critical effect: Bleeding +10%\n\nRank 2:\nChance of critical effect: Bleeding +20%\nSword damage +5%",
+        "rank": 2,
+        "treeId": "SWORDSMANSHIP",
+        "requiredTalentIds": [
+                                 "sword_hardy"
+                             ],
+        "row": 5,
+        "column": 4,
+        "order": 10,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "sword_sudden",
+        "icon": "SD",
+        "title": "Sudden Death",
+        "description": "Rank 1:\nChance of instant kill +2%\n\nRank 2:\nChance of instant kill +5%",
+        "rank": 2,
+        "treeId": "SWORDSMANSHIP",
+        "requiredTalentIds": [
+                                 "sword_hardy"
+                             ],
+        "row": 5,
+        "column": 2,
+        "order": 11,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "sword_finesse",
+        "icon": "FI",
+        "title": "Finesse",
+        "description": "Rank 1:\nAll critical effects chance +5%\n\nRank 2:\nAll critical effects chance +15%",
+        "rank": 2,
+        "treeId": "SWORDSMANSHIP",
+        "requiredTalentIds": [
+                                 "sword_hardy"
+                             ],
+        "row": 5,
+        "column": 3,
+        "order": 12,
+        "isMutagenSlot": false
+    },
+    {
+        "id": "sword_invincible",
+        "icon": "IN",
+        "title": "Invincible",
+        "description": "Rank 1:\nVitality +50\ndamage taken -5%\n\nRank 2:\nVitality +150\ndamage taken -15%",
+        "rank": 2,
+        "treeId": "SWORDSMANSHIP",
+        "requiredTalentIds": [
+                                 "sword_precision",
+                                 "sword_sudden",
+                                 "sword_finesse"
+                             ],
+        "row": 6,
+        "column": 3,
+        "order": 13,
+        "isMutagenSlot": true
+    },
+    {
+        "id": "sword_acumen",
+        "icon": "AC",
+        "title": "Combat Acumen",
+        "description": "Rank 1:\nAllows groups finisher, activation during adrenaline-filled bar\nAllows generation of adrenaline by sword blows\n\nRank 2:\nDamage + 10%\nDamage taken -10%",
+        "rank": 2,
+        "treeId": "SWORDSMANSHIP",
+        "requiredTalentIds": [
+                                 "sword_invincible"
+                             ],
+        "row": 7,
+        "column": 3,
+        "order": 14,
+        "isMutagenSlot": true
+    },
+    {
+        "id": "sword_whirlwind",
+        "icon": "WW",
+        "title": "Whirlwind",
+        "description": "Rank 1:\nAdrenaline generated by sword blows +10%\nAll resistances +10%\nAll critical effects chance +10%\n\nRank 2:\nAdrenaline generated by sword blows +30%\nAll resistances +20%\nAll critical effects chance +20%",
+        "rank": 2,
+        "treeId": "SWORDSMANSHIP",
+        "requiredTalentIds": [
+                                 "sword_acumen"
+                             ],
+        "row": 8,
+        "column": 3,
+        "order": 15,
+        "isMutagenSlot": true
+    }
+]
