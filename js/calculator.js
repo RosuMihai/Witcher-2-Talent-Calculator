@@ -10,6 +10,7 @@
     const ICON_FOLDER = "icons/";
 
     const treeGrid = document.getElementById("treeGrid");
+    const detailsColumn = document.querySelector(".details-column");
     const pointsUsed = document.getElementById("pointsUsed");
     const mutagenSlotsUnlocked = document.getElementById("mutagenSlotsUnlocked");
     const detailIcon = document.getElementById("detailIcon");
@@ -23,6 +24,8 @@
     const talentTooltipTitle = talentTooltip.querySelector(".talent-tooltip-title");
     const talentTooltipDescription = talentTooltip.querySelector(".talent-tooltip-description");
     let tooltipOwner = null;
+    let pinnedTalentTooltipId = null;
+    let lastPointerType = "";
 
     const state = {
         talents: [],
@@ -38,6 +41,7 @@
     treeGrid.innerHTML = "<div class=\"tree-empty\">Loading talents...</div>";
 
     resetAllButton.addEventListener("click", resetAllTrees);
+    document.addEventListener("pointerdown", handleDocumentPointerDown);
 
     loadTalentData().then(() => {});
 
@@ -149,11 +153,14 @@
             return;
         }
 
+        const talentId = node.dataset.id;
         if (event.shiftKey) {
-            removePoint(node.dataset.id);
+            removePoint(talentId);
         } else {
-            addPoint(node.dataset.id);
+            addPoint(talentId);
         }
+
+        refreshTalentTooltip(talentId, event, lastPointerType === "touch");
     });
 
     treeGrid.addEventListener("contextmenu", function (event) {
@@ -164,6 +171,7 @@
 
         event.preventDefault();
         removePoint(node.dataset.id);
+        refreshTalentTooltip(node.dataset.id, event, lastPointerType === "touch");
     });
 
     treeGrid.addEventListener("pointerover", function (event) {
@@ -171,7 +179,7 @@
         if (node) {
             state.hoveredId = node.dataset.id;
             renderDetails();
-            showTalentTooltip(node.dataset.id, event);
+            showTalentTooltip(node.dataset.id, event, node, event.pointerType === "touch");
             return;
         }
 
@@ -195,11 +203,11 @@
             return;
         }
 
-        if (state.hoveredId === node.dataset.id) {
+        if (state.hoveredId === node.dataset.id && pinnedTalentTooltipId !== node.dataset.id) {
             state.hoveredId = null;
             renderDetails();
         }
-        if (tooltipOwner === node) {
+        if (tooltipOwner === node && pinnedTalentTooltipId !== node.dataset.id) {
             hideTalentTooltip();
         }
     });
@@ -356,7 +364,7 @@
         renderTalentIcon(detailIcon, talent.icon);
         detailTree.textContent = talent.tree.name;
         detailTitle.textContent = talent.title;
-        detailDescription.textContent = talent.description;
+        renderTalentDescription(detailDescription, talent);
         detailRank.textContent = rank + " / " + talent.rank;
         detailStatus.textContent = getStatusText(talent);
     }
@@ -377,24 +385,55 @@
         return tooltip;
     }
 
-    function showTalentTooltip(id, event) {
+    function handleDocumentPointerDown(event) {
+        lastPointerType = event.pointerType || "";
+
+        if (!pinnedTalentTooltipId) {
+            return;
+        }
+
+        const node = event.target.closest(".talent-node");
+        if (node && node.dataset.id === pinnedTalentTooltipId) {
+            return;
+        }
+
+        if (state.hoveredId === pinnedTalentTooltipId) {
+            state.hoveredId = null;
+            renderDetails();
+        }
+        hideTalentTooltip();
+    }
+
+    function refreshTalentTooltip(id, event, pinTooltip) {
+        const renderedNode = getTalentNode(id);
+        if (!renderedNode) {
+            return;
+        }
+
+        state.hoveredId = id;
+        renderDetails();
+        showTalentTooltip(id, event, renderedNode, pinTooltip);
+    }
+
+    function showTalentTooltip(id, event, owner, pinTooltip) {
         const talent = state.byId.get(id);
         if (!talent) {
             hideTalentTooltip();
             return;
         }
 
-        const owner = event.target.closest(".talent-node");
-        showTextTooltip(talent.title + " (" + getRank(talent.id) + "/" + talent.rank + ")", talent.description, event, owner);
+        const tooltipOwnerElement = owner || event.target.closest(".talent-node");
+        showTalentTextTooltip(talent, event, tooltipOwnerElement, pinTooltip ? talent.id : null);
     }
 
-    function showTextTooltip(title, description, event, owner) {
+    function showTalentTextTooltip(talent, event, owner, pinnedTalentId) {
         talentTooltip.classList.remove("is-description-only");
         talentTooltipTitle.hidden = false;
-        talentTooltipTitle.textContent = title || "";
-        talentTooltipDescription.textContent = description || "";
-        talentTooltipDescription.hidden = !description;
+        talentTooltipTitle.textContent = talent.title + " (" + getRank(talent.id) + "/" + talent.rank + ")";
+        renderTalentDescription(talentTooltipDescription, talent);
+        talentTooltipDescription.hidden = false;
         tooltipOwner = owner || null;
+        pinnedTalentTooltipId = pinnedTalentId || null;
         talentTooltip.hidden = false;
         positionTalentTooltip(event);
     }
@@ -406,6 +445,7 @@
         talentTooltipDescription.textContent = text || "";
         talentTooltipDescription.hidden = false;
         tooltipOwner = owner || null;
+        pinnedTalentTooltipId = null;
         talentTooltip.hidden = false;
         positionTalentTooltip(event);
     }
@@ -413,25 +453,89 @@
     function hideTalentTooltip() {
         talentTooltip.hidden = true;
         tooltipOwner = null;
+        pinnedTalentTooltipId = null;
     }
 
     function positionTalentTooltip(event) {
         const offset = 16;
         const viewportPadding = 10;
         const tooltipRect = talentTooltip.getBoundingClientRect();
-        let left = event.clientX + offset;
         let top = event.clientY + offset;
-
-        if (left + tooltipRect.width + viewportPadding > window.innerWidth) {
-            left = event.clientX - tooltipRect.width - offset;
-        }
 
         if (top + tooltipRect.height + viewportPadding > window.innerHeight) {
             top = event.clientY - tooltipRect.height - offset;
         }
 
-        talentTooltip.style.left = Math.max(viewportPadding, left) + "px";
-        talentTooltip.style.top = Math.max(viewportPadding, top) + "px";
+        top = Math.max(viewportPadding, top);
+        const left = getTooltipHorizontalPosition(event, tooltipRect, top, offset, viewportPadding);
+
+        talentTooltip.style.left = left + "px";
+        talentTooltip.style.top = top + "px";
+    }
+
+    function getTooltipHorizontalPosition(event, tooltipRect, top, offset, viewportPadding) {
+        const rightSideLeft = event.clientX + offset;
+        const leftSideLeft = event.clientX - tooltipRect.width - offset;
+        const rightSideRect = getPositionedRect(rightSideLeft, top, tooltipRect);
+        const leftSideRect = getPositionedRect(leftSideLeft, top, tooltipRect);
+        const sidebarRect = getDetailsColumnRect();
+
+        if (sidebarRect
+                && rectsOverlap(rightSideRect, sidebarRect)
+                && leftSideLeft >= viewportPadding
+                && !rectsOverlap(leftSideRect, sidebarRect)) {
+            return leftSideLeft;
+        }
+
+        if (rightSideLeft + tooltipRect.width + viewportPadding > window.innerWidth
+                && leftSideLeft >= viewportPadding) {
+            return leftSideLeft;
+        }
+
+        return Math.max(
+            viewportPadding,
+            Math.min(rightSideLeft, window.innerWidth - tooltipRect.width - viewportPadding)
+        );
+    }
+
+    function getDetailsColumnRect() {
+        if (!detailsColumn) {
+            return null;
+        }
+
+        const rect = detailsColumn.getBoundingClientRect();
+        if (rect.width <= 0 || rect.height <= 0) {
+            return null;
+        }
+
+        return rect;
+    }
+
+    function getPositionedRect(left, top, sourceRect) {
+        return {
+            left: left,
+            top: top,
+            right: left + sourceRect.width,
+            bottom: top + sourceRect.height
+        };
+    }
+
+    function rectsOverlap(firstRect, secondRect) {
+        return firstRect.left < secondRect.right
+            && firstRect.right > secondRect.left
+            && firstRect.top < secondRect.bottom
+            && firstRect.bottom > secondRect.top;
+    }
+
+    function getTalentNode(id) {
+        const nodes = treeGrid.querySelectorAll(".talent-node");
+        for (let index = 0; index < nodes.length; index += 1) {
+            if (nodes[index].dataset.id === id) {
+                return nodes[index];
+            }
+        }
+
+        return null;
     }
 
     function renderTalentIcon(container, iconName) {
@@ -594,6 +698,49 @@
         }
 
         return getRank(talent.id) > 0 ? "Rank 1 purchased." : "Available.";
+    }
+
+    function getTalentDescription(talent) {
+        if (typeof talent.descriptionRank1 === "string" || typeof talent.descriptionRank2 === "string") {
+            return "Rank 1:\n"
+                + (talent.descriptionRank1 || "")
+                + "\n\nRank 2:\n"
+                + (talent.descriptionRank2 || "");
+        }
+
+        return talent.description || "";
+    }
+
+    function renderTalentDescription(container, talent) {
+        container.textContent = "";
+
+        if (typeof talent.descriptionRank1 !== "string" && typeof talent.descriptionRank2 !== "string") {
+            container.textContent = getTalentDescription(talent);
+            return;
+        }
+
+        const rank = getRank(talent.id);
+        appendTalentRankDescription(container, 1, talent.descriptionRank1 || "", rank >= 1);
+        appendTalentRankDescription(container, 2, talent.descriptionRank2 || "", rank >= 2);
+    }
+
+    function appendTalentRankDescription(container, rank, description, isUnlocked) {
+        const section = document.createElement("span");
+        const label = document.createElement("span");
+        const text = document.createElement("span");
+
+        section.className = "talent-description-rank";
+        if (isUnlocked) {
+            section.classList.add("is-unlocked");
+        }
+
+        label.className = "talent-description-rank-label";
+        label.textContent = "Rank " + rank + ":";
+        text.className = "talent-description-rank-text";
+        text.textContent = description;
+
+        section.append(label, text);
+        container.appendChild(section);
     }
 
     function getAddBlockedText(talent) {

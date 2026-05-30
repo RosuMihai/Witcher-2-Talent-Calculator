@@ -88,6 +88,17 @@ h1 {
     padding-inline: 6px;
 }
 
+#pointsUsed,
+#mutagenSlotsUnlocked {
+    display: inline-block;
+    flex: 0 0 2ch;
+    width: 2ch;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+    line-height: 1;
+    text-align: center;
+}
+
 .point-meter .divider,
 .mutagen-meter .divider {
     margin: 0 5px;
@@ -96,7 +107,7 @@ h1 {
 
 .point-label {
     margin-left: 8px;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     line-height: 1.05;
     white-space: normal;
 }
@@ -207,6 +218,13 @@ h1 {
     font-size: 0.9rem;
     line-height: 1;
     transform: rotate(90deg);
+}
+
+@-moz-document url-prefix() {
+    .reset-all::before {
+        position: relative;
+        left: 0.1rem;
+    }
 }
 
 .tree-reset:hover:not(:disabled),
@@ -419,7 +437,7 @@ h1 {
 .sidebar-controls {
     display: grid;
     align-items: center;
-    grid-template-columns: minmax(0, 6.2fr) minmax(0, 3.8fr);
+    grid-template-columns: minmax(0, 5.4fr) minmax(0, 4.6fr);
     gap: 8px;
     margin-bottom: 10px;
 }
@@ -452,7 +470,7 @@ h1 {
     display: grid;
     grid-template-columns: 58px minmax(0, 1fr);
     gap: 13px;
-    align-items: center;
+    align-items: start;
 }
 
 .detail-icon {
@@ -480,6 +498,7 @@ h1 {
 .details-panel h2 {
     margin: 0;
     font-size: 1.35rem;
+    line-height: 1.18;
     letter-spacing: 0;
     overflow-wrap: anywhere;
 }
@@ -547,6 +566,31 @@ h1 {
     margin: 0;
 }
 
+.talent-description-rank,
+.talent-description-rank-label,
+.talent-description-rank-text {
+    display: block;
+}
+
+.talent-description-rank + .talent-description-rank {
+    margin-top: 1em;
+}
+
+.talent-description-rank-label {
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.talent-description-rank.is-unlocked .talent-description-rank-label {
+    color: #fff8c9;
+    text-shadow: 0 0 10px rgba(255, 231, 120, 0.62);
+}
+
+.talent-description-rank.is-unlocked .talent-description-rank-text {
+    color: #fff9a8;
+    text-shadow: 0 0 12px rgba(255, 220, 72, 0.7);
+}
+
 .talent-tooltip-title[hidden],
 .talent-tooltip-description[hidden] {
     display: none;
@@ -558,6 +602,17 @@ h1 {
     background: var(--panel-bg);
     padding: 18px;
     color: var(--muted);
+}
+
+@media (min-width: 1800px) {
+    .app-shell {
+        width: min(1800px, calc(100% - 64px));
+    }
+
+    .calculator-layout {
+        grid-template-columns: minmax(0, 1fr) 380px;
+        gap: 26px;
+    }
 }
 
 @media (max-width: 1180px) {
@@ -600,7 +655,7 @@ h1 {
         z-index: 60;
         width: min(340px, calc(100vw - 20px));
         max-width: calc(100vw - 20px);
-        grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+        grid-template-columns: minmax(0, 4.6fr) minmax(0, 5.4fr);
         margin-bottom: 0;
     }
 
