@@ -42,6 +42,7 @@
 
     resetAllButton.addEventListener("click", resetAllTrees);
     document.addEventListener("pointerdown", handleDocumentPointerDown);
+    talentTooltip.addEventListener("pointerdown", handleTalentTooltipPointerDown);
 
     loadTalentData().then(() => {});
 
@@ -404,6 +405,18 @@
         hideTalentTooltip();
     }
 
+    function handleTalentTooltipPointerDown() {
+        if (!pinnedTalentTooltipId) {
+            return;
+        }
+
+        if (state.hoveredId === pinnedTalentTooltipId) {
+            state.hoveredId = null;
+            renderDetails();
+        }
+        hideTalentTooltip();
+    }
+
     function refreshTalentTooltip(id, event, pinTooltip) {
         const renderedNode = getTalentNode(id);
         if (!renderedNode) {
@@ -434,6 +447,7 @@
         talentTooltipDescription.hidden = false;
         tooltipOwner = owner || null;
         pinnedTalentTooltipId = pinnedTalentId || null;
+        talentTooltip.classList.toggle("is-pinned", Boolean(pinnedTalentTooltipId));
         talentTooltip.hidden = false;
         positionTalentTooltip(event);
     }
@@ -446,6 +460,7 @@
         talentTooltipDescription.hidden = false;
         tooltipOwner = owner || null;
         pinnedTalentTooltipId = null;
+        talentTooltip.classList.remove("is-pinned");
         talentTooltip.hidden = false;
         positionTalentTooltip(event);
     }
@@ -454,23 +469,33 @@
         talentTooltip.hidden = true;
         tooltipOwner = null;
         pinnedTalentTooltipId = null;
+        talentTooltip.classList.remove("is-pinned");
     }
 
     function positionTalentTooltip(event) {
         const offset = 16;
         const viewportPadding = 10;
         const tooltipRect = talentTooltip.getBoundingClientRect();
-        let top = event.clientY + offset;
-
-        if (top + tooltipRect.height + viewportPadding > window.innerHeight) {
-            top = event.clientY - tooltipRect.height - offset;
-        }
-
-        top = Math.max(viewportPadding, top);
+        const top = getTooltipVerticalPosition(event, tooltipRect, offset, viewportPadding);
         const left = getTooltipHorizontalPosition(event, tooltipRect, top, offset, viewportPadding);
 
         talentTooltip.style.left = left + "px";
         talentTooltip.style.top = top + "px";
+    }
+
+    function getTooltipVerticalPosition(event, tooltipRect, offset, viewportPadding) {
+        const belowTop = event.clientY + offset;
+        const aboveTop = event.clientY - tooltipRect.height - offset;
+
+        if (pinnedTalentTooltipId && aboveTop >= viewportPadding) {
+            return aboveTop;
+        }
+
+        if (belowTop + tooltipRect.height + viewportPadding > window.innerHeight) {
+            return Math.max(viewportPadding, aboveTop);
+        }
+
+        return belowTop;
     }
 
     function getTooltipHorizontalPosition(event, tooltipRect, top, offset, viewportPadding) {
