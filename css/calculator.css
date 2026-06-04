@@ -71,7 +71,7 @@ h1 {
     border: 1px solid rgba(240, 199, 71, 0.4);
     background: linear-gradient(180deg, rgba(42, 38, 25, 0.92), rgba(12, 14, 10, 0.92));
     box-shadow: 0 0 22px rgba(240, 199, 71, 0.14);
-    padding: 8px 0;
+    padding: 8px 8px;
     font-size: 1.55rem;
     color: var(--gold-bright);
 }
@@ -105,10 +105,13 @@ h1 {
 }
 
 .point-label {
-    flex: 0 0 auto;
+    flex: 1 1 auto;
+    min-width: 0;
     font-size: 1.25rem;
     line-height: 1.05;
+    text-align: center;
     white-space: normal;
+    overflow-wrap: anywhere;
 }
 
 .point-meter .point-label {
