@@ -64,7 +64,8 @@ h1 {
 .mutagen-meter {
     display: inline-flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 8px;
     width: 100%;
     min-width: 0;
     height: 58px;
@@ -83,8 +84,13 @@ h1 {
     color: #d3f7ff;
 }
 
-.point-meter {
-    padding-inline: 0;
+.meter-readout {
+    display: inline-flex;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-width: 0;
 }
 
 #pointsUsed,
@@ -105,21 +111,14 @@ h1 {
 }
 
 .point-label {
-    flex: 1 1 auto;
-    min-width: 0;
+    flex: 0 1 min-content;
+    inline-size: min-content;
+    min-inline-size: min-content;
     font-size: 1.25rem;
     line-height: 1.05;
-    text-align: center;
+    text-align: left;
     white-space: normal;
-    overflow-wrap: anywhere;
-}
-
-.point-meter .point-label {
-    max-width: 80px;
-}
-
-.mutagen-meter .point-label {
-    max-width: 80px;
+    overflow-wrap: normal;
 }
 
 .calculator-layout {
