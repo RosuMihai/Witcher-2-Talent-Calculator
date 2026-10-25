@@ -456,7 +456,8 @@
         "rank": 2,
         "treeId": "ALCHEMY",
         "requiredTalentIds": [
-                                 "alchemy_oils"
+                                 "alchemy_oils",
+                                 "alchemy_impregnation"
                              ],
         "row": 5,
         "column": 2,
@@ -488,7 +489,8 @@
         "rank": 2,
         "treeId": "ALCHEMY",
         "requiredTalentIds": [
-                                 "alchemy_oils"
+                                 "alchemy_oils",
+                                 "alchemy_impregnation"
                              ],
         "row": 5,
         "column": 4,
