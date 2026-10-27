@@ -1015,15 +1015,37 @@
     }
 
     function hasPurchasedDependentsNeeding(id) {
-        return state.talents.some(function (talent) {
-            if (getRank(talent.id) === 0 || talent.requiredTalentIds.indexOf(id) === -1) {
-                return false;
-            }
+        const points = new Map(state.points);
+        points.set(id, 0);
+        return !arePurchasedTalentsConnected(points);
+    }
 
-            return !talent.requiredTalentIds.some(function (requiredTalentId) {
-                return requiredTalentId !== id && getRank(requiredTalentId) > 0;
-            });
+    // Every purchased talent must trace back to a talent without requirements through
+    // purchased talents; checking only direct requirements lets cycles support each other.
+    function arePurchasedTalentsConnected(points) {
+        const purchased = state.talents.filter(function (talent) {
+            return getRankFrom(points, talent.id) > 0;
         });
+        const connectedIds = new Set();
+        let changed = true;
+
+        while (changed) {
+            changed = false;
+            purchased.forEach(function (talent) {
+                if (connectedIds.has(talent.id)) {
+                    return;
+                }
+
+                if (hasNoRequirements(talent) || talent.requiredTalentIds.some(function (requiredTalentId) {
+                    return connectedIds.has(requiredTalentId);
+                })) {
+                    connectedIds.add(talent.id);
+                    changed = true;
+                }
+            });
+        }
+
+        return connectedIds.size === purchased.length;
     }
 
     function getMaxRow(talents) {
@@ -1137,21 +1159,12 @@
             return false;
         }
 
-        return state.talents.every(function (talent) {
+        const ranksValid = state.talents.every(function (talent) {
             const rank = getRankFrom(points, talent.id);
-            if (rank < 0 || rank > talent.rank) {
-                return false;
-            }
-
-            if (rank === 0) {
-                return true;
-            }
-
-            return talent.requiredTalentIds.length === 0
-                || talent.requiredTalentIds.some(function (requiredTalentId) {
-                    return getRankFrom(points, requiredTalentId) > 0;
-                });
+            return rank >= 0 && rank <= talent.rank;
         });
+
+        return ranksValid && arePurchasedTalentsConnected(points);
     }
 
     function updateTalentsParamInUrl() {
